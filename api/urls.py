@@ -9,11 +9,11 @@ from .views import PostViewSet, CommentViewSet, FollowViewSet, GroupViewSet
 
 router = DefaultRouter()
 
-router.register('posts', PostViewSet, basename='posts-list')
-router.register('posts/(?P<post_id>.+)/comments', CommentViewSet,
+router.register('v1/posts', PostViewSet, basename='posts-list')
+router.register('v1/posts/(?P<post_id>.+)/comments', CommentViewSet,
                 basename='comments-list')
-router.register('follow', FollowViewSet, basename='follows-list')
-router.register('group', GroupViewSet, basename='groups-list')
+router.register('v1/follow', FollowViewSet, basename='follows-list')
+router.register('v1/group', GroupViewSet, basename='groups-list')
 
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
