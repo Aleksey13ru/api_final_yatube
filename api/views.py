@@ -8,13 +8,13 @@ from .serializers import (PostSerializer, CommentSerializer,
 from .permission import IsAuthorOrReadOnly
 
 
-class POST_GET(viewsets.mixins.CreateModelMixin,
+class PostGet(viewsets.mixins.CreateModelMixin,
                viewsets.mixins.ListModelMixin,
                viewsets.GenericViewSet):
     pass
 
 
-class GroupViewSet(POST_GET):
+class GroupViewSet(PostGet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -48,7 +48,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-class FollowViewSet(POST_GET):
+class FollowViewSet(PostGet):
     serializer_class = FollowSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['=following__username', '=user__username']
